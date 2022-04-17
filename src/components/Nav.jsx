@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
-import Logo from '../logoHenry.png'
 import './Nav.css';
-import Cards from "./Cards";
+import Cards from './Cards.jsx'
 const axios= require('axios');
 
 export default function Nav() {
@@ -11,7 +10,7 @@ export default function Nav() {
   const API_KEY='4ae2636d8dfbdc3044bede63951a019b'  
   var repeatedState=true
 
-  //[4,[2, 5, 11],3,[1,3,4]]
+  /*[4,[2, 5, 11],3,[1,3,4]]
   function sumMultArray(array){
     var sumTotal=0
     for(let i=0;i<array.length;i++){
@@ -22,10 +21,67 @@ export default function Nav() {
        }
     }
     return sumTotal
-  }
+  }*/
   function handleInputChange(e){
     e.preventDefault() 
     setNameCity(e.target.value) 
+  }
+
+  function handleSort(e){
+    e.preventDefault() 
+    let orderName = e.target.value === 'asc' ?
+                    citiesInfo.cities.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        if (b.name > a.name) {
+                            return -1;
+                        }
+                        return 0;
+                    }) :
+                    citiesInfo.cities.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return -1;
+                        }
+                        if (b.name > a.name) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+
+    setCitiesInfo({
+                  ...citiesInfo,
+                  cities:orderName                                        
+                  })                
+     
+  }
+
+  function handleSortTemp(e){
+    e.preventDefault() 
+    let orderTemp = e.target.value === 'min' ?
+                    citiesInfo.cities.sort(function (a, b) {
+                        if (a.temp > b.temp) {
+                            return 1;
+                        }
+                        if (b.temp > a.temp) {
+                            return -1;
+                        }
+                        return 0;
+                    }) :
+                    citiesInfo.cities.sort(function (a, b) {
+                        if (a.temp > b.temp) {
+                            return -1;
+                        }
+                        if (b.temp > a.temp) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+
+    setCitiesInfo({
+                  ...citiesInfo,
+                  cities:orderTemp                                        
+                  })
   }
 
   async function handleSubmit(e){
@@ -49,15 +105,16 @@ export default function Nav() {
                   {
                     name:infoWeather.data.name,
                     id:infoWeather.data.id,
+                    temp:Math.round(infoWeather.data.main.temp),
                     min:Math.round(infoWeather.data.main.temp_min),
                     max:Math.round(infoWeather.data.main.temp_max),
                     img: infoWeather.data.weather[0].icon
                   }
                 ]         
         })
-    console.log(citiesInfo.cities)
     }
-    
+      setNameCity("");
+      
     }catch(error){
       console.log(error)
       alert("Colocar un ciudad que exista")
@@ -68,15 +125,25 @@ export default function Nav() {
 
   return (
     <div>
-        <nav className="navbar navbar-light bg-light">
+        <select onChange = {(e) => handleSort(e)}>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendiente</option>
+        </select>
+        <br/>
+        <select onChange = {(e) => handleSortTemp(e)}>
+          <option value="min">Mínimo</option>
+          <option value="max">Máximo</option>
+        </select>
+        <nav id="navbar" className="navbar navbar-light bg-light">
           <form className="form-inline">
-            <input className="form-control mr-sm-2" type="text" placeholder="Ciudad..." aria-label="Search" onChange = {(e) => handleInputChange(e)}/>
+            <input value={nameCity} className="form-control mr-sm-2" type="text" placeholder="Ciudad..." aria-label="Search" onChange = {(e) => handleInputChange(e)}/>
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e => handleSubmit(e)}>Agregar</button>
           </form>
         </nav> 
          <div className='cards'>
             {citiesInfo.cities.map(el => 
-                <div className="card">
+              <div key={el.id} className="col-sm-4 col-md-4 col-lg-4">
+                <div className="card" id="card">
                   <div id="closeIcon" className="row">
                       <button onClick={function onClose(e){
                       let nameCities=citiesInfo.cities.filter(c=> c.id!==el.id)
@@ -84,11 +151,11 @@ export default function Nav() {
                             ...citiesInfo,
                             cities:nameCities                                        
                           })
-                      console.log("las ciudades que tengo son: ",nameCities)
                       }} className="btn btn-sm btn-danger">X</button>
                   </div>
                   <div className="card-body">
                     <h5 className="card-title">{el.name}</h5>
+                    <h2>{el.temp}°</h2>
                     <div className="row">
                       <div className="col-sm-4 col-md-4 col-lg-4">
                         <p>Min</p>
@@ -104,9 +171,9 @@ export default function Nav() {
                     </div>
                   </div>
                 </div>
+              </div>  
              )}
-         </div>  
-         <div>{sumMultArray([4,[2, 5, 11],3,[1,3,4]])}</div>        
+         </div>      
     </div>
   );
 };

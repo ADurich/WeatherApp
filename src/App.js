@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
+
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './App.css';
 import Nav from "./components/Nav";
-const axios= require('axios');
 
 
 export default function App() {
