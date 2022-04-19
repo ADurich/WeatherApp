@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import './Nav.css';
+import '../index.css'
 import Cards from './Cards.jsx'
+import Order from './Order.jsx'
+//import {hola} from './Order.jsx'
 const axios= require('axios');
 
 export default function Nav() {
@@ -28,7 +31,7 @@ export default function Nav() {
   }
 
   function handleSort(e){
-    e.preventDefault() 
+    e.preventDefault()
     let orderName = e.target.value === 'asc' ?
                     citiesInfo.cities.sort(function (a, b) {
                         if (a.name > b.name) {
@@ -125,21 +128,20 @@ export default function Nav() {
 
   return (
     <div>
-        <select onChange = {(e) => handleSort(e)}>
-          <option value="asc">Ascendente</option>
-          <option value="desc">Descendiente</option>
-        </select>
-        <br/>
-        <select onChange = {(e) => handleSortTemp(e)}>
-          <option value="min">Mínimo</option>
-          <option value="max">Máximo</option>
-        </select>
         <nav id="navbar" className="navbar navbar-light bg-light">
           <form className="form-inline">
             <input value={nameCity} className="form-control mr-sm-2" type="text" placeholder="Ciudad..." aria-label="Search" onChange = {(e) => handleInputChange(e)}/>
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e => handleSubmit(e)}>Agregar</button>
           </form>
         </nav> 
+        <select onChange = {(e) => handleSort(e)}>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendiente</option>
+        </select>        
+        <select onChange = {(e) => handleSortTemp(e)}>
+          <option value="min">Mínimo</option>
+          <option value="max">Máximo</option>
+        </select>
          <div className='cards'>
             {citiesInfo.cities.map(el => 
               <div key={el.id} className="col-sm-4 col-md-4 col-lg-4">

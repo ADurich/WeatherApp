@@ -9,14 +9,22 @@ body{
 }
 
 #card{
-	background: #141E30;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-	border-radius: 30px;
+	background: #141E30;  
+	background: -webkit-linear-gradient(to right, #243B55, #141E30); 
+	background: linear-gradient(to right, #243B55, #141E30); 
+	border-radius: 20px;
 	margin-right: 100px;
 	margin-bottom: 30px;
 	color: white;
+	display: block;
+}
+
+div select{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 20px;
+	padding: 14px 14px 14px 22px;
+	border: 2px solid #17A2B8;
+	border-radius: 8px;
 }
