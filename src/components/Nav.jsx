@@ -2,29 +2,15 @@ import React,{useState} from 'react';
 import './Nav.css';
 import '../index.css'
 import Cards from './Cards.jsx'
-import Order from './Order.jsx'
-//import {hola} from './Order.jsx'
 const axios= require('axios');
 
 export default function Nav() {
 
   const [nameCity,setNameCity] = useState("") 
-  const [citiesInfo,setCitiesInfo] = useState({cities:[]})  
-  const API_KEY='4ae2636d8dfbdc3044bede63951a019b'  
+  const [citiesInfo,setCitiesInfo] = useState({cities:[]})
+  const API_KEY = "4ae2636d8dfbdc3044bede63951a019b";  
   var repeatedState=true
 
-  /*[4,[2, 5, 11],3,[1,3,4]]
-  function sumMultArray(array){
-    var sumTotal=0
-    for(let i=0;i<array.length;i++){
-       if(Array.isArray(array[i])){
-        sumTotal=sumTotal+sumMultArray(array[i])
-       }else{
-        sumTotal=sumTotal+array[i]
-       }
-    }
-    return sumTotal
-  }*/
   function handleInputChange(e){
     e.preventDefault() 
     setNameCity(e.target.value) 
@@ -90,10 +76,7 @@ export default function Nav() {
   async function handleSubmit(e){
     e.preventDefault(); 
     try{
-      const infoWeather=await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=${API_KEY}&units=metric`);
-      //el nombre que pongo como input puede estar tanto en inglés como en español(imagino que también en otros) y en minúsculas.
-    //Los que tengan dos o más palabras se ponen así y automáticamente la api les agrega el %20. Osea, obtengo la respuesta.
-    //el cambiar el lenguaje cuando hago la llamada solo modifica el campo descripcion y el nombre
+      const infoWeather=await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=${API_KEY}&units=metric`);      
 
     citiesInfo.cities.map(el=>{
       if(nameCity===el.name){
@@ -135,8 +118,8 @@ export default function Nav() {
           </form>
         </nav> 
         <select onChange = {(e) => handleSort(e)}>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendiente</option>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
         </select>        
         <select onChange = {(e) => handleSortTemp(e)}>
           <option value="min">Mínimo</option>
@@ -180,15 +163,3 @@ export default function Nav() {
   );
 };
 
-/*
-
-let cityInfo=await infoWeather.data.map((el)=>{
-      return {
-        name:el.name,
-        id:el.id,
-        min:Math.round(el.main.temp_min),
-        max:Math.round(el.main.temp_max),
-        img:el.weather[0].icon
-      }
-    })
-    */

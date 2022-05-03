@@ -4,18 +4,7 @@ import Cards from './Cards.jsx';
 
 export default function Card ({min, max, name, img, id,}) {
 
-    //const [nameCity,setNameCity] = useState({check:false})
-/*
-    function onClose(){
-      let deletedCity=cities.cities.filter(el=>el.id!==id)
-      setNameCity({
-          ...nameCity,
-          check:true,
-          cities:deletedCity
-        
-        })
-    }*/
-    //if(!nameCity.check){
+
       return (
       <div className="card">
         <div id="closeIcon" className="row">
@@ -39,9 +28,5 @@ export default function Card ({min, max, name, img, id,}) {
         </div>
       </div>
     );
-    //}else{
-      //return(
-        //<Cards cities={nameCity} />
-       // )
-    //}
+   
 };
