@@ -1,10 +1,7 @@
-
 import './Cards.css';
 
-//import Card from './Card.jsx';
-
 export default function Cards({cities}) {
-  //if(cities){
+  
     var infoCities=cities
 
     return (
@@ -34,9 +31,5 @@ export default function Cards({cities}) {
          )}
       </div>
     );
-  //} else {
-   // return(
-     // <div>Sin ciudades</div>
-    //)
-  //}
+  
 }
