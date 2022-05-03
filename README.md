@@ -5,8 +5,6 @@
 ### Visitar el sitio web acá
 <a href="">Link Sitio Web</a>
 
-
-#### Catalogo
 <img width="90%" src="https://github.com/ADurich/WeatherApp/blob/main/weatherImages/weather1.png" alt="About screen" title="Landing"/>
 <img width="90%" src="https://github.com/ADurich/WeatherApp/blob/main/weatherImages/weather2.png" alt="About screen" title="Landing"/>
 
